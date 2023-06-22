@@ -49,3 +49,8 @@ compatibility_date = "2023-06-22"
 # [[migrations]]
 # tag = "v1"
 # new_classes = ["MyDurableObject"]
+
+[[d1_databases]]
+binding = "D1" # i.e. available in your Worker on env.DB
+database_name = "business-day"
+database_id = "c7b31eb1-9062-462e-bb48-6fd73247911b"
