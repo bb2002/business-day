@@ -22,29 +22,50 @@ export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const { pathname } = new URL(request.url);
 		const { method } = request;
-		const body = await request.json();
 
-		if (pathname === '/api/business') {
-			if (method === 'POST') {
-				const createBusinessDayDto = plainToInstance(CreateBusinessDayDto, body);
-				const errors = await validate(createBusinessDayDto);
-				if (errors.length > 0) {
-					return new Response(null, { status: 400 });
+		try {
+			if (pathname === '/api/business') {
+				if (method === 'POST') {
+					const body = await request.json();
+					const createBusinessDayDto = plainToInstance(CreateBusinessDayDto, body);
+					const errors = await validate(createBusinessDayDto);
+					if (errors.length > 0) {
+						return new Response(null, { status: 400 });
+					}
+
+					const result = JSON.stringify(
+						await createBusinessDay({
+							D1: env.D1,
+							createBusinessDayDto,
+						})
+					);
+					return new Response(result, {
+						status: 201,
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					});
 				}
 
-				const result = JSON.stringify(
-					await createBusinessDay({
-						D1: env.D1,
-						createBusinessDayDto,
-					})
-				);
-				return new Response(result, { status: 201 });
+				if (method === 'GET') {
+					const businessDays = await getAllBusinessDays({ D1: env.D1 });
+					return new Response(JSON.stringify(businessDays), {
+						status: 200,
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					});
+				}
 			}
-
-			if (method === 'GET') {
-				const result = JSON.stringify(await getAllBusinessDays({ D1: env.D1 }));
-				return new Response(result, { status: 200 });
-			}
+		} catch (ex: any) {
+			return new Response(JSON.stringify({ message: ex.message ?? 'Internal server error.' }), {
+				status: 500,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 		}
+
+		return new Response(null, { status: 404 });
 	},
 };

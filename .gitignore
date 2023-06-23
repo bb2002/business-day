@@ -1,2 +1,36 @@
-/.wrangler
-/node_modules
+.wrangler
+.DS_Store
+
+# IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Log files
+logs/
+*.heapsnapshot
+*.log
+
+.nodemonignore
+**.*~
+
+# Elastic Beanstalk Files
+.elasticbeanstalk
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Coupon Pin
+.scripts/coupon.*
+
+# Eclipse
+.project
+.settings/*
+
+# typescript
+built/
+dist/
+node_modules/
+
+# prisma migration
+src/db/prisma/migrations

@@ -9,7 +9,7 @@ export class GetBusinessDayDto {
 	nickname: string;
 
 	@IsNumber()
-	businessDay: number;
+	businessDayCount: number;
 
 	@IsDate()
 	@Transform(({ value }) => new Date(value))
