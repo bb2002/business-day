@@ -13,13 +13,12 @@ import { validate } from 'class-validator';
 import { CreateBusinessDayDto } from './dtos/createBusinessDay.dto';
 import createBusinessDay from './functions/createBusinessDay';
 import getAllBusinessDays from './functions/getAllBusinessDays';
+import { IEnv } from './common/IEnv';
 
-export interface Env {
-	D1: D1Database;
-}
+
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: IEnv, ctx: ExecutionContext): Promise<Response> {
 		const { pathname } = new URL(request.url);
 		const { method } = request;
 

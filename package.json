@@ -17,6 +17,8 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "date-fns": "^2.30.0",
+    "typedi": "^0.10.0",
+    "url-pattern": "^1.0.3",
     "uuid": "^9.0.0"
   }
 }
