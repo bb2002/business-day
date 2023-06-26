@@ -11,11 +11,11 @@
 import { json, error } from 'itty-router';
 import Container from 'typedi';
 import { IEnv } from './common/interfaces/IEnv';
-import v1Router from './routers/v1.router';
+import v1Router, { cors } from './routers/v1.router';
 
 export default {
 	fetch: (request: Request, env: IEnv, ctx: ExecutionContext) => {
 		Container.set('env', env);
-		return v1Router.handle(request, env, ctx).then(json).catch(error);
+		return v1Router.handle(request, env, ctx).then(json).catch(error).then(cors.corsify);
 	},
 };
