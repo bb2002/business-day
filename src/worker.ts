@@ -14,11 +14,17 @@ import { CreateBusinessDayDto } from './dtos/createBusinessDay.dto';
 import createBusinessDay from './functions/createBusinessDay';
 import getAllBusinessDays from './functions/getAllBusinessDays';
 import { IEnv } from './common/IEnv';
-
-
+import Container from 'typedi';
+import { BusinessDayController } from './business-day/business-day.controller';
+import UrlPattern from 'url-pattern';
+import { FetchParams } from './common/IController';
+import { NotFoundException } from './common/exceptions/NotFoundException';
+import { v1Fetch } from './router/v1.router';
 
 export default {
-	async fetch(request: Request, env: IEnv, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: IEnv, context: ExecutionContext): Promise<Response> {
+		
+		/*
 		const { pathname } = new URL(request.url);
 		const { method } = request;
 
@@ -66,5 +72,6 @@ export default {
 		}
 
 		return new Response(null, { status: 404 });
+		*/
 	},
 };

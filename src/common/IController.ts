@@ -7,9 +7,9 @@ export interface FetchParams {
 }
 
 export interface IController {
-  get(params: FetchParams): Object;
-  post(params: FetchParams): Object;
-  patch(params: FetchParams): Object;
-  put(params: FetchParams): Object;
-  delete(params: FetchParams): Object;
+  get(params: FetchParams): Promise<Object> | void;
+  post(params: FetchParams): Promise<Object> | void;
+  patch(params: FetchParams): Promise<Object> | void;
+  put(params: FetchParams): Promise<Object> | void;
+  delete(params: FetchParams): Promise<Object> | void;
 }
