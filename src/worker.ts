@@ -8,17 +8,19 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { plainToInstance } from 'class-transformer';
-import { validate } from 'class-validator';
-import { CreateBusinessDayDto } from './dtos/createBusinessDay.dto';
-import createBusinessDay from './functions/createBusinessDay';
-import getAllBusinessDays from './functions/getAllBusinessDays';
+import {
+  json,
+	error
+} from 'itty-router'
+import v1Router from './routers/v1.router';
 
 export interface Env {
 	D1: D1Database;
 }
 
+/*
 export default {
+	
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const { pathname } = new URL(request.url);
 		const { method } = request;
@@ -69,3 +71,7 @@ export default {
 		return new Response(null, { status: 404 });
 	},
 };
+*/
+export default {
+	fetch: (request: Request, ...args: any) => v1Router.handle(request, ...args).then(json).catch(error)
+}
