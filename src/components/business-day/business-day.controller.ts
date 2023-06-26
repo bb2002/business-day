@@ -6,11 +6,11 @@ import { BusinessDayService } from './business-day.service';
 
 @Service()
 export class BusinessDayController implements IController {
-  constructor(@Inject() private readonly businessDayService: BusinessDayService) {
+	@Inject(() => BusinessDayService)
+	private readonly businessDayService: BusinessDayService;
 
-  }
-
-  bind(router: RouterType, prefix: string) {
-    router.get(prefix + '/business-day', this.businessDayService.hello);
-  }
+	bind(router: RouterType, prefix: string) {
+		router.get(prefix + '/business-day', this.businessDayService.getAllBusinessDays);
+		router.post(prefix + '/business-day', this.businessDayService.createBusinessDay);
+	}
 }
