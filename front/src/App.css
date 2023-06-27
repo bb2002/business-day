@@ -51,3 +51,8 @@ h4 {
   font-weight: 600;
 }
 
+#user-table {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
